@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(start generate-icons.html)",
-      "Bash(start quick-icons.html)"
+      "Bash(start quick-icons.html)",
+      "Skill(impeccable)",
+      "Bash(node *)",
+      "Bash(git add *)",
+      "Bash(start icon-preview.html)"
     ]
   }
 }

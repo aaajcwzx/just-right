@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>刚刚好 - 图标方案预览</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+      background: oklch(96% 0.005 260);
+      color: oklch(25% 0.01 260);
+      padding: 40px 20px;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .page-sub {
+      text-align: center;
+      font-size: 14px;
+      color: oklch(55% 0.01 260);
+      margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border: 1px solid oklch(92% 0.005 260);
+      border-radius: 8px;
+      padding: 28px;
+    }
+    .card-head {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: oklch(55% 0.01 260);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      min-height: 34px;
+    }
+    .sizes {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      background: oklch(98% 0.005 260);
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .size-item { text-align: center; }
+    .size-item svg { display: block; border-radius: 22%; }
+    .size-label {
+      font-size: 11px;
+      color: oklch(60% 0.01 260);
+      margin-top: 6px;
+    }
+    .on-dark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      background: oklch(20% 0.02 260);
+      border-radius: 6px;
+    }
+    .on-dark svg { border-radius: 22%; }
+    .on-dark span { font-size: 12px; color: oklch(75% 0.01 260); }
+  </style>
+</head>
+<body>
+  <div class="page-title">刚刚好 · 图标方案</div>
+  <div class="page-sub">5 套方案，每套展示 128 / 48 / 16 三种尺寸 + 深色背景效果</div>
+
+  <div class="grid">
+
+    <!-- 方案1：抽象几何 平衡感 -->
+    <div class="card">
+      <div class="card-head">方案 1 · 抽象几何（平衡）</div>
+      <div class="card-desc">三段竖条，中间最高，象征"刚刚好"的平衡。简约专业，不暴露功能。</div>
+      <div class="sizes">
+        <div class="size-item">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <rect x="20" y="44" width="11" height="20" rx="2" fill="#7d9bd6"/>
+            <rect x="34.5" y="24" width="11" height="40" rx="2" fill="#aec4ee"/>
+            <rect x="49" y="36" width="11" height="28" rx="2" fill="#7d9bd6"/>
+          </svg>
+          <div class="size-label">128</div>
+        </div>
+        <div class="size-item">
+          <svg width="48" height="48" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <rect x="20" y="44" width="11" height="20" rx="2" fill="#7d9bd6"/>
+            <rect x="34.5" y="24" width="11" height="40" rx="2" fill="#aec4ee"/>
+            <rect x="49" y="36" width="11" height="28" rx="2" fill="#7d9bd6"/>
+          </svg>
+          <div class="size-label">48</div>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <rect x="20" y="44" width="11" height="20" rx="2" fill="#7d9bd6"/>
+            <rect x="34.5" y="24" width="11" height="40" rx="2" fill="#aec4ee"/>
+            <rect x="49" y="36" width="11" height="28" rx="2" fill="#7d9bd6"/>
+          </svg>
+          <div class="size-label">16</div>
+        </div>
+      </div>
+      <div class="on-dark">
+        <svg width="32" height="32" viewBox="0 0 80 80">
+          <rect width="80" height="80" fill="#2d3f6b"/>
+          <rect x="20" y="44" width="11" height="20" rx="2" fill="#7d9bd6"/>
+          <rect x="34.5" y="24" width="11" height="40" rx="2" fill="#aec4ee"/>
+          <rect x="49" y="36" width="11" height="28" rx="2" fill="#7d9bd6"/>
+        </svg>
+        <span>工具栏深色背景效果</span>
+      </div>
+    </div>
+
+    <!-- 方案2：时钟 -->
+    <div class="card">
+      <div class="card-head">方案 2 · 时钟</div>
+      <div class="card-desc">简化时钟，指针指向"刚刚好"的时点。功能直观，体现定时提醒。</div>
+      <div class="sizes">
+        <div class="size-item">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#f2f4f9"/>
+            <circle cx="40" cy="40" r="22" fill="none" stroke="#2d3f6b" stroke-width="4"/>
+            <line x1="40" y1="40" x2="40" y2="26" stroke="#2d3f6b" stroke-width="4" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="51" y2="46" stroke="#5a76b8" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="3" fill="#2d3f6b"/>
+          </svg>
+          <div class="size-label">128</div>
+        </div>
+        <div class="size-item">
+          <svg width="48" height="48" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#f2f4f9"/>
+            <circle cx="40" cy="40" r="22" fill="none" stroke="#2d3f6b" stroke-width="4"/>
+            <line x1="40" y1="40" x2="40" y2="26" stroke="#2d3f6b" stroke-width="4" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="51" y2="46" stroke="#5a76b8" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="3" fill="#2d3f6b"/>
+          </svg>
+          <div class="size-label">48</div>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#f2f4f9"/>
+            <circle cx="40" cy="40" r="22" fill="none" stroke="#2d3f6b" stroke-width="6"/>
+            <line x1="40" y1="40" x2="40" y2="26" stroke="#2d3f6b" stroke-width="6" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="51" y2="46" stroke="#5a76b8" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <div class="size-label">16</div>
+        </div>
+      </div>
+      <div class="on-dark">
+        <svg width="32" height="32" viewBox="0 0 80 80">
+          <rect width="80" height="80" fill="#f2f4f9"/>
+          <circle cx="40" cy="40" r="22" fill="none" stroke="#2d3f6b" stroke-width="4"/>
+          <line x1="40" y1="40" x2="40" y2="26" stroke="#2d3f6b" stroke-width="4" stroke-linecap="round"/>
+          <line x1="40" y1="40" x2="51" y2="46" stroke="#5a76b8" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="40" cy="40" r="3" fill="#2d3f6b"/>
+        </svg>
+        <span>工具栏深色背景效果</span>
+      </div>
+    </div>
+
+    <!-- 方案3：字母 JR -->
+    <div class="card">
+      <div class="card-head">方案 3 · 字母 JR</div>
+      <div class="card-desc">Just Right 缩写 JR，圆润现代。识别度高，适合品牌化。</div>
+      <div class="sizes">
+        <div class="size-item">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <text x="40" y="40" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">JR</text>
+          </svg>
+          <div class="size-label">128</div>
+        </div>
+        <div class="size-item">
+          <svg width="48" height="48" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <text x="40" y="40" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">JR</text>
+          </svg>
+          <div class="size-label">48</div>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <text x="40" y="42" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central" letter-spacing="-3">JR</text>
+          </svg>
+          <div class="size-label">16</div>
+        </div>
+      </div>
+      <div class="on-dark">
+        <svg width="32" height="32" viewBox="0 0 80 80">
+          <rect width="80" height="80" fill="#2d3f6b"/>
+          <text x="40" y="40" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">JR</text>
+        </svg>
+        <span>工具栏深色背景效果</span>
+      </div>
+    </div>
+
+    <!-- 方案4：汉字"刚" -->
+    <div class="card">
+      <div class="card-head">方案 4 · 汉字「刚」</div>
+      <div class="card-desc">取"刚"字，文化感强，独特唯一。中文产品识别度高。</div>
+      <div class="sizes">
+        <div class="size-item">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#eef1f7"/>
+            <text x="40" y="42" font-family="'Microsoft YaHei', sans-serif" font-size="46" font-weight="600" fill="#2d3f6b" text-anchor="middle" dominant-baseline="central">刚</text>
+          </svg>
+          <div class="size-label">128</div>
+        </div>
+        <div class="size-item">
+          <svg width="48" height="48" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#eef1f7"/>
+            <text x="40" y="42" font-family="'Microsoft YaHei', sans-serif" font-size="46" font-weight="600" fill="#2d3f6b" text-anchor="middle" dominant-baseline="central">刚</text>
+          </svg>
+          <div class="size-label">48</div>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#eef1f7"/>
+            <text x="40" y="43" font-family="'Microsoft YaHei', sans-serif" font-size="56" font-weight="700" fill="#2d3f6b" text-anchor="middle" dominant-baseline="central">刚</text>
+          </svg>
+          <div class="size-label">16</div>
+        </div>
+      </div>
+      <div class="on-dark">
+        <svg width="32" height="32" viewBox="0 0 80 80">
+          <rect width="80" height="80" fill="#eef1f7"/>
+          <text x="40" y="42" font-family="'Microsoft YaHei', sans-serif" font-size="46" font-weight="600" fill="#2d3f6b" text-anchor="middle" dominant-baseline="central">刚</text>
+        </svg>
+        <span>工具栏深色背景效果</span>
+      </div>
+    </div>
+
+    <!-- 方案5：波形律动 -->
+    <div class="card">
+      <div class="card-head">方案 5 · 波形律动</div>
+      <div class="card-desc">平滑波形，象征收缩-放松的节奏律动。健康主题，柔和有动感。</div>
+      <div class="sizes">
+        <div class="size-item">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <path d="M16 40 Q28 20 40 40 T64 40" fill="none" stroke="#aec4ee" stroke-width="5" stroke-linecap="round"/>
+            <path d="M16 52 Q28 36 40 52 T64 52" fill="none" stroke="#5a76b8" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <div class="size-label">128</div>
+        </div>
+        <div class="size-item">
+          <svg width="48" height="48" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <path d="M16 40 Q28 20 40 40 T64 40" fill="none" stroke="#aec4ee" stroke-width="5" stroke-linecap="round"/>
+            <path d="M16 52 Q28 36 40 52 T64 52" fill="none" stroke="#5a76b8" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <div class="size-label">48</div>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="16" viewBox="0 0 80 80">
+            <rect width="80" height="80" fill="#2d3f6b"/>
+            <path d="M14 42 Q28 18 40 42 T66 42" fill="none" stroke="#aec4ee" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+          <div class="size-label">16</div>
+        </div>
+      </div>
+      <div class="on-dark">
+        <svg width="32" height="32" viewBox="0 0 80 80">
+          <rect width="80" height="80" fill="#2d3f6b"/>
+          <path d="M16 40 Q28 20 40 40 T64 40" fill="none" stroke="#aec4ee" stroke-width="5" stroke-linecap="round"/>
+          <path d="M16 52 Q28 36 40 52 T64 52" fill="none" stroke="#5a76b8" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span>工具栏深色背景效果</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -25,21 +25,35 @@ function createAlarm(intervalMinutes) {
 // 监听定时器触发
 chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === 'healthReminder') {
-    const { enabled } = await chrome.storage.sync.get('enabled');
+    const settings = await chrome.storage.sync.get(['enabled', 'startTime', 'endTime']);
 
-    if (enabled) {
-      showNotification();
+    if (!settings.enabled) return;
+
+    // 检查是否在工作时段内
+    const now = new Date();
+    const currentHour = now.getHours();
+    const startTime = settings.startTime || 0;
+    const endTime = settings.endTime || 24;
+
+    // 如果设置了时段限制且当前不在时段内，则跳过
+    if (startTime > 0 || endTime < 24) {
+      if (currentHour < startTime || currentHour >= endTime) {
+        console.log('不在工作时段内，跳过提醒');
+        return;
+      }
     }
+
+    showNotification();
   }
 });
 
 // 显示通知
 function showNotification() {
-  chrome.notifications.create({
+  chrome.notifications.create('healthReminder', {
     type: 'basic',
     iconUrl: 'icons/icon128.png',
     title: '健康提醒 ⏰',
-    message: '该做盆底肌锻炼了！点击查看运动指导',
+    message: '该做盆底肌锻炼了！点击开始练习',
     priority: 2,
     requireInteraction: true
   }, (notificationId) => {
@@ -47,9 +61,17 @@ function showNotification() {
   });
 }
 
-// 监听通知点击
-chrome.notifications.onClicked.addListener(() => {
-  chrome.action.openPopup();
+// 监听通知点击 - 直接打开练习页面
+chrome.notifications.onClicked.addListener((notificationId) => {
+  if (notificationId === 'healthReminder') {
+    chrome.windows.create({
+      url: 'exercise.html',
+      type: 'popup',
+      width: 520,
+      height: 640
+    });
+    chrome.notifications.clear(notificationId);
+  }
 });
 
 // 监听来自popup的消息

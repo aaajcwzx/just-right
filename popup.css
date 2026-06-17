@@ -7,44 +7,72 @@
 body {
   width: 380px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #333;
+  background: oklch(98% 0.005 260);
+  color: oklch(25% 0.01 260);
 }
 
 .container {
-  background: white;
+  background: oklch(98% 0.005 260);
   max-height: 600px;
   overflow-y: auto;
 }
 
 header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 20px;
-  text-align: center;
+  background: white;
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid oklch(92% 0.005 260);
 }
 
 h1 {
-  font-size: 24px;
-  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
 }
 
 .subtitle {
-  font-size: 14px;
-  opacity: 0.9;
+  font-size: 13px;
+  color: oklch(55% 0.01 260);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: oklch(92% 0.005 260);
+  border-bottom: 1px solid oklch(92% 0.005 260);
+}
+
+.stat-item {
+  background: white;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: oklch(45% 0.15 260);
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: oklch(55% 0.01 260);
 }
 
 .controls {
   padding: 20px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #e0e0e0;
+  background: white;
+  border-bottom: 1px solid oklch(92% 0.005 260);
 }
 
 .control-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .control-item:last-child {
@@ -52,6 +80,7 @@ h1 {
 }
 
 .control-label {
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -59,7 +88,7 @@ h1 {
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px;
+  width: 44px;
   height: 24px;
 }
 
@@ -76,98 +105,107 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  transition: 0.3s;
-  border-radius: 24px;
+  background-color: oklch(88% 0.005 260);
+  transition: background-color 0.2s ease;
+  border-radius: 12px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
   background-color: white;
-  transition: 0.3s;
-  border-radius: 50%;
+  transition: transform 0.2s ease;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 input:checked + .slider {
-  background-color: #667eea;
+  background-color: oklch(45% 0.15 260);
 }
 
 input:checked + .slider:before {
-  transform: translateX(26px);
+  transform: translateX(20px);
 }
 
 /* 下拉选择 */
 select {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 6px 10px;
+  border: 1px solid oklch(88% 0.005 260);
+  border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
   background: white;
+  color: oklch(25% 0.01 260);
 }
 
 select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: oklch(45% 0.15 260);
 }
 
 /* 运动指南 */
 .exercise-guide {
   padding: 20px;
+  background: white;
 }
 
 .exercise-guide h2 {
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 600;
   margin-bottom: 16px;
-  color: #667eea;
+  color: oklch(25% 0.01 260);
+  letter-spacing: -0.01em;
 }
 
 .step {
   display: flex;
-  margin-bottom: 16px;
-  animation: fadeIn 0.5s ease-in;
+  margin-bottom: 14px;
+  gap: 12px;
 }
 
 .step-number {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 24px;
+  height: 24px;
+  background: oklch(45% 0.15 260);
   color: white;
-  border-radius: 50%;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  margin-right: 12px;
+  font-weight: 600;
+  font-size: 13px;
 }
 
 .step-content h3 {
-  font-size: 15px;
-  margin-bottom: 4px;
-  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  color: oklch(25% 0.01 260);
 }
 
 .step-content p {
   font-size: 13px;
-  color: #666;
+  color: oklch(55% 0.01 260);
   line-height: 1.5;
 }
 
 /* 健康益处 */
 .benefits {
   padding: 0 20px 20px;
+  background: white;
 }
 
 .benefits h3 {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   margin-bottom: 12px;
-  color: #667eea;
+  color: oklch(25% 0.01 260);
+  letter-spacing: -0.01em;
 }
 
 .benefits ul {
@@ -176,85 +214,75 @@ select:focus {
 }
 
 .benefits li {
-  padding: 8px 0 8px 24px;
+  padding: 6px 0 6px 20px;
   font-size: 13px;
-  color: #555;
+  color: oklch(55% 0.01 260);
   position: relative;
   line-height: 1.5;
 }
 
 .benefits li:before {
-  content: "✓";
+  content: "·";
   position: absolute;
-  left: 0;
-  color: #667eea;
+  left: 8px;
+  color: oklch(45% 0.15 260);
   font-weight: bold;
+  font-size: 16px;
 }
 
 /* 操作按钮 */
 .action-button {
   margin: 0 20px 20px;
   width: calc(100% - 40px);
-  padding: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 11px 16px;
+  background: oklch(45% 0.15 260);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.15s ease;
 }
 
 .action-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  background: oklch(40% 0.15 260);
 }
 
 .action-button:active {
-  transform: translateY(0);
+  background: oklch(35% 0.15 260);
 }
 
 /* 页脚提示 */
 footer {
   padding: 16px 20px;
-  background: #f8f9fa;
-  border-top: 1px solid #e0e0e0;
+  background: white;
+  border-top: 1px solid oklch(92% 0.005 260);
 }
 
 .tip {
   font-size: 12px;
-  color: #666;
-  text-align: center;
-  line-height: 1.6;
+  color: oklch(65% 0.01 260);
+  line-height: 1.5;
 }
 
 /* 滚动条样式 */
 .container::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .container::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 .container::-webkit-scrollbar-thumb {
-  background: #667eea;
-  border-radius: 3px;
+  background: oklch(85% 0.005 260);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-  background: #764ba2;
-}
-
-/* 动画 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background: oklch(75% 0.01 260);
+  background-clip: padding-box;
 }

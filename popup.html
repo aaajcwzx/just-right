@@ -13,6 +13,21 @@
       <p class="subtitle">关爱盆底健康，从现在开始</p>
     </header>
 
+    <section class="stats">
+      <div class="stat-item">
+        <div class="stat-value" id="totalSessions">0</div>
+        <div class="stat-label">总练习次数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="todaySessions">0</div>
+        <div class="stat-label">今日练习</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="streak">0</div>
+        <div class="stat-label">连续天数</div>
+      </div>
+    </section>
+
     <section class="controls">
       <div class="control-item">
         <label class="switch">
@@ -23,7 +38,7 @@
       </div>
 
       <div class="control-item">
-        <label for="intervalSelect">提醒间隔：</label>
+        <label for="intervalSelect">提醒间隔</label>
         <select id="intervalSelect">
           <option value="30">30分钟</option>
           <option value="45" selected>45分钟</option>
@@ -31,6 +46,65 @@
           <option value="90">1.5小时</option>
           <option value="120">2小时</option>
         </select>
+      </div>
+
+      <div class="control-item">
+        <label for="repsSelect">练习次数</label>
+        <select id="repsSelect">
+          <option value="10">10次</option>
+          <option value="15" selected>15次</option>
+          <option value="20">20次</option>
+        </select>
+      </div>
+
+      <div class="control-item">
+        <label for="contractSelect">收缩时长</label>
+        <select id="contractSelect">
+          <option value="3">3秒</option>
+          <option value="5" selected>5秒</option>
+          <option value="8">8秒</option>
+          <option value="10">10秒</option>
+        </select>
+      </div>
+
+      <div class="control-item">
+        <label for="relaxSelect">放松时长</label>
+        <select id="relaxSelect">
+          <option value="5">5秒</option>
+          <option value="10" selected>10秒</option>
+          <option value="15">15秒</option>
+        </select>
+      </div>
+
+      <div class="control-item">
+        <label for="startTimeSelect">工作时段开始</label>
+        <select id="startTimeSelect">
+          <option value="0">不限制</option>
+          <option value="7">7:00</option>
+          <option value="8">8:00</option>
+          <option value="9" selected>9:00</option>
+          <option value="10">10:00</option>
+        </select>
+      </div>
+
+      <div class="control-item">
+        <label for="endTimeSelect">工作时段结束</label>
+        <select id="endTimeSelect">
+          <option value="24">不限制</option>
+          <option value="17">17:00</option>
+          <option value="18" selected>18:00</option>
+          <option value="19">19:00</option>
+          <option value="20">20:00</option>
+          <option value="22">22:00</option>
+        </select>
+      </div>
+
+      <div class="control-item">
+        <label class="switch">
+          <input type="checkbox" id="soundToggle">
+          <span class="slider"></span>
+        </label>
+        <span class="control-label">音效提示</span>
       </div>
     </section>
 
