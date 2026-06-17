@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start generate-icons.html)",
+      "Bash(start quick-icons.html)"
+    ]
+  }
+}

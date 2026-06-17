@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>快速生成图标</title>
+</head>
+<body>
+  <h1>正在生成图标...</h1>
+  <p id="status">请稍候</p>
+
+  <script>
+    async function createAndDownloadIcons() {
+      const sizes = [16, 48, 128];
+
+      for (const size of sizes) {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+
+        // 渐变背景
+        const gradient = ctx.createLinearGradient(0, 0, size, size);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(1, '#764ba2');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, size, size);
+
+        // 白色圆形
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(size/2, size/2, size*0.35, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 绘制💪符号（简化为文字）
+        ctx.fillStyle = '#667eea';
+        ctx.font = `bold ${size * 0.5}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('💪', size/2, size/2);
+
+        // 转换为blob并下载
+        const blob = await new Promise(resolve => canvas.toBlob(resolve));
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `icon${size}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+
+      document.getElementById('status').innerHTML =
+        '✅ 图标已生成！<br><br>' +
+        '请将下载的 3 个文件（icon16.png, icon48.png, icon128.png）<br>' +
+        '移动到插件的 <strong>icons</strong> 目录中，<br>' +
+        '然后重新加载插件。';
+    }
+
+    createAndDownloadIcons();
+  </script>
+</body>
+</html>
