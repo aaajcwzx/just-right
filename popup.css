@@ -35,6 +35,25 @@ h1 {
   color: oklch(55% 0.01 260);
 }
 
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: oklch(96% 0.005 260);
+  color: oklch(45% 0.01 260);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background: oklch(92% 0.005 260);
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -232,7 +251,7 @@ select:focus {
 
 /* 操作按钮 */
 .action-button {
-  margin: 0 20px 20px;
+  margin: 0 20px 16px;
   width: calc(100% - 40px);
   padding: 11px 16px;
   background: oklch(45% 0.15 260);
@@ -251,6 +270,113 @@ select:focus {
 
 .action-button:active {
   background: oklch(35% 0.15 260);
+}
+
+/* 数据管理 */
+.data-section {
+  padding: 16px 20px 20px;
+  background: white;
+}
+
+.data-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: oklch(25% 0.01 260);
+  letter-spacing: -0.01em;
+}
+
+.data-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.data-btn {
+  flex: 1;
+  padding: 8px 12px;
+  background: oklch(96% 0.005 260);
+  color: oklch(45% 0.01 260);
+  border: 1px solid oklch(88% 0.005 260);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.data-btn:hover {
+  background: oklch(92% 0.005 260);
+  border-color: oklch(45% 0.15 260);
+}
+
+.data-btn.danger {
+  color: oklch(50% 0.15 10);
+}
+
+.data-btn.danger:hover {
+  background: oklch(98% 0.02 10);
+  border-color: oklch(50% 0.15 10);
+}
+
+/* 成就系统 */
+.achievements {
+  padding: 16px 20px 20px;
+  background: white;
+  border-top: 1px solid oklch(92% 0.005 260);
+}
+
+.achievements h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: oklch(25% 0.01 260);
+  letter-spacing: -0.01em;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.achievement {
+  text-align: center;
+  padding: 12px 8px;
+  background: oklch(98% 0.005 260);
+  border-radius: 6px;
+  border: 1px solid oklch(92% 0.005 260);
+  transition: all 0.15s ease;
+}
+
+.achievement.unlocked {
+  background: oklch(96% 0.02 260);
+  border-color: oklch(45% 0.15 260);
+}
+
+.achievement-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+  opacity: 0.3;
+}
+
+.achievement.unlocked .achievement-icon {
+  opacity: 1;
+}
+
+.achievement-name {
+  font-size: 11px;
+  color: oklch(45% 0.01 260);
+  font-weight: 500;
+}
+
+.achievement.unlocked .achievement-name {
+  color: oklch(45% 0.15 260);
+}
+
+.achievement-desc {
+  font-size: 10px;
+  color: oklch(60% 0.01 260);
+  margin-top: 2px;
 }
 
 /* 页脚提示 */

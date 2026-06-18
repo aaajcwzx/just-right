@@ -7,7 +7,8 @@ let exerciseState = {
   totalCount: 15,
   timeLeft: 5,
   totalProgress: 0,
-  soundEnabled: false
+  soundEnabled: false,
+  privacyMode: false
 };
 
 // 阶段配置
@@ -20,16 +21,22 @@ let phases = {
 // 加载用户设置
 async function loadExerciseSettings() {
   const settings = await chrome.storage.sync.get([
-    'reps', 'contractDuration', 'relaxDuration', 'soundEnabled'
+    'reps', 'contractDuration', 'relaxDuration', 'soundEnabled', 'privacyMode'
   ]);
 
   exerciseState.totalCount = settings.reps || 15;
   phases.contract.duration = settings.contractDuration || 5;
   phases.relax.duration = settings.relaxDuration || 10;
   exerciseState.soundEnabled = settings.soundEnabled ?? false;
+  exerciseState.privacyMode = settings.privacyMode ?? false;
 
   // 更新初始显示
   counterEl.textContent = `第 0 / ${exerciseState.totalCount} 次`;
+
+  // 应用隐私模式
+  if (exerciseState.privacyMode) {
+    document.body.classList.add('privacy-mode');
+  }
 }
 
 // 页面加载时初始化设置
@@ -272,6 +279,48 @@ async function saveExerciseStats() {
   currentStats.lastDate = today;
 
   await chrome.storage.sync.set({ stats: currentStats });
+
+  // 检查每日目标
+  await checkDailyGoal(currentStats.dailyLog[today]);
+
+  // 检查新成就
+  await checkNewAchievements(currentStats);
+}
+
+// 检查新解锁的成就
+async function checkNewAchievements(stats) {
+  const achievements = [
+    { id: 'first', icon: '🎯', name: '初次尝试', check: (s) => s?.totalSessions === 1 },
+    { id: 'week', icon: '📅', name: '坚持7天', check: (s) => s?.streak === 7 },
+    { id: 'month', icon: '🏆', name: '坚持30天', check: (s) => s?.streak === 30 },
+    { id: 'hundred', icon: '💯', name: '百炼成钢', check: (s) => s?.totalSessions === 100 },
+    { id: 'streak14', icon: '🔥', name: '持续热情', check: (s) => s?.streak === 14 }
+  ];
+
+  const unlockedAch = achievements.find(ach => ach.check(stats));
+  if (unlockedAch) {
+    setTimeout(() => {
+      alert(`${unlockedAch.icon} 恭喜解锁成就：${unlockedAch.name}！`);
+    }, 800);
+  }
+}
+
+// 检查每日目标
+async function checkDailyGoal(todaySessions) {
+  const { dailyGoal } = await chrome.storage.sync.get('dailyGoal');
+  const goal = dailyGoal || 3;
+
+  if (goal > 0 && todaySessions === goal) {
+    // 完成每日目标，显示祝贺
+    setTimeout(() => {
+      if (confirm(`🎉 恭喜完成今日目标（${goal}组）！\n\n要继续练习吗？`)) {
+        resetExercise();
+        completionView.classList.remove('show');
+        exerciseView.style.display = 'block';
+        startExercise();
+      }
+    }, 500);
+  }
 }
 
 // 重置状态

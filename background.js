@@ -9,6 +9,12 @@ chrome.runtime.onInstalled.addListener(async () => {
     createAlarm(interval);
   }
 
+  // 设置休息提醒（默认关闭）
+  const { breakReminderEnabled } = await chrome.storage.sync.get('breakReminderEnabled');
+  if (breakReminderEnabled) {
+    createBreakAlarm();
+  }
+
   console.log('刚刚好插件已安装');
 });
 
@@ -44,6 +50,11 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     }
 
     showNotification();
+  } else if (alarm.name === 'breakReminder') {
+    const { breakReminderEnabled } = await chrome.storage.sync.get('breakReminderEnabled');
+    if (breakReminderEnabled) {
+      showBreakNotification();
+    }
   }
 });
 
@@ -88,6 +99,35 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       chrome.alarms.clear('healthReminder');
     }
     sendResponse({ success: true });
+  } else if (request.action === 'toggleBreakReminder') {
+    if (request.enabled) {
+      createBreakAlarm();
+    } else {
+      chrome.alarms.clear('breakReminder');
+    }
+    sendResponse({ success: true });
   }
   return true;
 });
+
+// 创建休息提醒定时器（每2小时）
+function createBreakAlarm() {
+  chrome.alarms.clear('breakReminder');
+  chrome.alarms.create('breakReminder', {
+    delayInMinutes: 120,
+    periodInMinutes: 120
+  });
+  console.log('休息提醒已设置：每2小时提醒一次');
+}
+
+// 显示休息通知
+function showBreakNotification() {
+  chrome.notifications.create('breakReminder', {
+    type: 'basic',
+    iconUrl: 'icons/icon128.png',
+    title: '休息提醒 ☕',
+    message: '该站起来走动走动了！\n喝口水、远眺、伸展一下',
+    priority: 1,
+    requireInteraction: false
+  });
+}

@@ -36,14 +36,18 @@
     // 绘制图标到指定 canvas
     function draw(canvas, size) {
       const ctx = canvas.getContext('2d');
+
+      // 确保 canvas 尺寸正确
+      canvas.width = size;
+      canvas.height = size;
+
       const s = size / 80; // 基于 80 网格缩放
 
       // 背景
       ctx.fillStyle = '#2d3f6b';
       ctx.fillRect(0, 0, size, size);
 
-      // 圆角裁切（通过先画背景再叠加，简单填满即可，圆角由展示层处理）
-      // 三段竖条
+      // 圆角矩形函数
       function bar(x, y, w, h, color) {
         const r = 2 * s;
         const X = x * s, Y = y * s, W = w * s, H = h * s;
@@ -58,9 +62,10 @@
         ctx.fill();
       }
 
-      bar(20, 44, 11, 20, '#7d9bd6');
-      bar(34.5, 24, 11, 40, '#aec4ee');
-      bar(49, 36, 11, 28, '#7d9bd6');
+      // 三段竖条
+      bar(20, 44, 11, 20, '#7d9bd6');    // 左
+      bar(34.5, 24, 11, 40, '#aec4ee');  // 中
+      bar(49, 36, 11, 28, '#7d9bd6');    // 右
     }
 
     draw(document.getElementById('c128'), 128);
@@ -68,20 +73,28 @@
     draw(document.getElementById('c16'), 16);
 
     async function downloadOne(canvas, name) {
-      const blob = await new Promise(r => canvas.toBlob(r));
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = name;
-      a.click();
-      URL.revokeObjectURL(url);
+      return new Promise(resolve => {
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = name;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          resolve();
+        }, 'image/png');
+      });
     }
 
     async function downloadAll() {
+      document.getElementById('status').textContent = '正在生成...';
+
       await downloadOne(document.getElementById('c128'), 'icon128.png');
-      await new Promise(r => setTimeout(r, 200));
+      await new Promise(r => setTimeout(r, 300));
       await downloadOne(document.getElementById('c48'), 'icon48.png');
-      await new Promise(r => setTimeout(r, 200));
+      await new Promise(r => setTimeout(r, 300));
       await downloadOne(document.getElementById('c16'), 'icon16.png');
 
       document.getElementById('status').innerHTML =
