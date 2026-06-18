@@ -64,7 +64,7 @@ function showNotification() {
     type: 'basic',
     iconUrl: 'icons/icon128.png',
     title: '健康提醒 ⏰',
-    message: '该做盆底肌锻炼了！点击开始练习',
+    message: '该活动一下了！点击开始',
     priority: 2,
     requireInteraction: true
   }, (notificationId) => {

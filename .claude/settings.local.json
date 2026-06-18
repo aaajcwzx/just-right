@@ -6,7 +6,8 @@
       "Skill(impeccable)",
       "Bash(node *)",
       "Bash(git add *)",
-      "Bash(start icon-preview.html)"
+      "Bash(start icon-preview.html)",
+      "Bash(grep -E '\\\\.\\(js|html\\)$')"
     ]
   }
 }
