@@ -200,16 +200,16 @@ function updateDisplay() {
   // 更新计时器
   timerEl.textContent = timeLeft;
 
-  // 更新阶段文字
+  // 更新阶段文字（隐私模式下使用简化描述）
   if (currentPhase === 'contract') {
-    phaseEl.textContent = '收缩盆底肌';
-    instructionEl.textContent = '像憋尿、憋便那样收紧肛门和会阴部，保持收缩状态';
+    phaseEl.textContent = exerciseState.privacyMode ? '保持' : '收缩盆底肌';
+    instructionEl.textContent = exerciseState.privacyMode ? '保持当前状态' : '像憋尿、憋便那样收紧肛门和会阴部，保持收缩状态';
   } else if (currentPhase === 'relax') {
     phaseEl.textContent = '放松休息';
-    instructionEl.textContent = '完全放松盆底肌肉，自然呼吸，休息一会';
+    instructionEl.textContent = exerciseState.privacyMode ? '放松休息' : '完全放松盆底肌肉，自然呼吸，休息一会';
   } else if (currentPhase === 'rest') {
     phaseEl.textContent = '准备下一次';
-    instructionEl.textContent = '调整呼吸，准备进行下一次收缩';
+    instructionEl.textContent = exerciseState.privacyMode ? '准备下一次' : '调整呼吸，准备进行下一次收缩';
   }
 
   // 更新计数
@@ -232,6 +232,14 @@ async function completeExercise() {
 
   // 保存统计数据
   await saveExerciseStats();
+
+  // 更新完成页面文字（隐私模式下使用简化描述）
+  const completionText = document.getElementById('completionText');
+  if (exerciseState.privacyMode) {
+    completionText.innerHTML = '已完成一组锻炼<br>坚持练习，保持健康';
+  } else {
+    completionText.innerHTML = '已完成一组盆底肌锻炼<br>坚持练习，保持健康';
+  }
 
   // 显示完成界面
   exerciseView.style.display = 'none';
