@@ -6,16 +6,6 @@ let stats = {
   dailyLog: {}
 };
 
-// 成就定义
-const achievements = [
-  { id: 'first', icon: '🌱', name: '初次尝试', desc: '完成首次练习', check: s => s.totalSessions >= 1 },
-  { id: 'week', icon: '📅', name: '坚持7天', desc: '连续7天练习', check: s => s.streak >= 7 },
-  { id: 'month', icon: '🏆', name: '满月成就', desc: '连续30天练习', check: s => s.streak >= 30 },
-  { id: 'hundred', icon: '💯', name: '百炼成钢', desc: '累计100次练习', check: s => s.totalSessions >= 100 },
-  { id: 'daily5', icon: '⭐', name: '勤奋之星', desc: '单日完成5次', check: s => Object.values(s.dailyLog || {}).some(v => v >= 5) },
-  { id: 'streak14', icon: '🔥', name: '热情不减', desc: '连续14天练习', check: s => s.streak >= 14 }
-];
-
 // 加载统计数据
 async function loadStats() {
   const result = await chrome.storage.sync.get(['stats']);
@@ -38,7 +28,7 @@ function renderAchievements() {
   const grid = document.getElementById('achievementGrid');
   grid.innerHTML = '';
 
-  achievements.forEach(achievement => {
+  ACHIEVEMENTS.forEach(achievement => {
     const unlocked = achievement.check(stats);
     const div = document.createElement('div');
     div.className = 'achievement' + (unlocked ? ' unlocked' : '');

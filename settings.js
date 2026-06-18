@@ -153,8 +153,8 @@ intervalSelect.addEventListener('change', async (e) => {
 customIntervalInput.addEventListener('change', async (e) => {
   const interval = parseInt(e.target.value);
 
-  if (interval < 1 || interval > 1440) {
-    showFeedback('间隔范围：1-1440分钟');
+  if (interval < VALIDATION_RULES.interval.min || interval > VALIDATION_RULES.interval.max) {
+    showFeedback(`间隔范围：${VALIDATION_RULES.interval.min}-${VALIDATION_RULES.interval.max}分钟`);
     return;
   }
 
@@ -254,9 +254,9 @@ importFileInput.addEventListener('change', async (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
-  // 限制文件大小（最大100KB）
-  if (file.size > 100 * 1024) {
-    alert('导入失败：文件过大（最大100KB）');
+  // 限制文件大小
+  if (file.size > VALIDATION_RULES.fileSize.max) {
+    alert(`导入失败：文件过大（最大${VALIDATION_RULES.fileSize.max / 1024}KB）`);
     importFileInput.value = '';
     return;
   }
@@ -273,13 +273,14 @@ importFileInput.addEventListener('change', async (e) => {
     }
 
     // 验证关键字段类型
-    if (data.interval !== undefined && (typeof data.interval !== 'number' || data.interval < 1 || data.interval > 1440)) {
+    const rules = VALIDATION_RULES;
+    if (data.interval !== undefined && (typeof data.interval !== 'number' || data.interval < rules.interval.min || data.interval > rules.interval.max)) {
       alert('导入失败：提醒间隔数据无效');
       importFileInput.value = '';
       return;
     }
 
-    if (data.reps !== undefined && (typeof data.reps !== 'number' || data.reps < 1 || data.reps > 100)) {
+    if (data.reps !== undefined && (typeof data.reps !== 'number' || data.reps < rules.reps.min || data.reps > rules.reps.max)) {
       alert('导入失败：练习次数数据无效');
       importFileInput.value = '';
       return;

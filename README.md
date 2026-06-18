@@ -98,14 +98,13 @@ A browser extension that reminds sedentary office workers to do pelvic floor exe
   <tr>
     <td width="50%">
       <img src="screenshots/3.png" alt="运动指南" />
-      <p align="center"><em>运动指南 - 详细的步骤说明</em></p>
     </td>
     <td width="50%">
       <img src="screenshots/4.png" alt="练习界面" />
-      <p align="center"><em>练习界面 - 实时引导和进度追踪</em></p>
     </td>
   </tr>
 </table>
+
 
 ## 📁 文件结构
 

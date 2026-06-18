@@ -289,15 +289,7 @@ async function saveExerciseStats() {
 
 // 检查新解锁的成就
 async function checkNewAchievements(stats) {
-  const achievements = [
-    { id: 'first', icon: '🎯', name: '初次尝试', check: (s) => s?.totalSessions === 1 },
-    { id: 'week', icon: '📅', name: '坚持7天', check: (s) => s?.streak === 7 },
-    { id: 'month', icon: '🏆', name: '坚持30天', check: (s) => s?.streak === 30 },
-    { id: 'hundred', icon: '💯', name: '百炼成钢', check: (s) => s?.totalSessions === 100 },
-    { id: 'streak14', icon: '🔥', name: '持续热情', check: (s) => s?.streak === 14 }
-  ];
-
-  const unlockedAch = achievements.find(ach => ach.check(stats));
+  const unlockedAch = ACHIEVEMENTS.find(ach => ach.check(stats));
   if (unlockedAch) {
     setTimeout(() => {
       alert(`${unlockedAch.icon} 恭喜解锁成就：${unlockedAch.name}！`);
