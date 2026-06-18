@@ -115,9 +115,9 @@ function startExercise() {
   exerciseState.currentCount = 1;
   exerciseState.timeLeft = phases.contract.duration;
 
-  startBtn.style.display = 'none';
-  pauseBtn.style.display = 'inline-block';
-  skipBtn.style.display = 'inline-block';
+  startBtn.classList.add('hidden');
+  pauseBtn.classList.remove('hidden');
+  skipBtn.classList.remove('hidden');
 
   updateDisplay();
   runTimer();
@@ -336,9 +336,9 @@ function resetExercise() {
     totalProgress: 0
   };
 
-  startBtn.style.display = 'inline-block';
-  pauseBtn.style.display = 'none';
-  skipBtn.style.display = 'none';
+  startBtn.classList.remove('hidden');
+  pauseBtn.classList.add('hidden');
+  skipBtn.classList.add('hidden');
   pauseBtn.textContent = '暂停';
 
   phaseEl.textContent = '准备开始';
@@ -446,5 +446,12 @@ document.addEventListener('keydown', (e) => {
   if (e.code === 'KeyH') {
     e.preventDefault();
     window.blur();
+  }
+});
+
+// 窗口关闭时清理timer
+window.addEventListener('beforeunload', () => {
+  if (timer) {
+    clearInterval(timer);
   }
 });

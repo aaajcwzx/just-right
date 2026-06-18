@@ -254,9 +254,36 @@ importFileInput.addEventListener('change', async (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
+  // 限制文件大小（最大100KB）
+  if (file.size > 100 * 1024) {
+    alert('导入失败：文件过大（最大100KB）');
+    importFileInput.value = '';
+    return;
+  }
+
   try {
     const text = await file.text();
     const data = JSON.parse(text);
+
+    // 验证数据结构
+    if (typeof data !== 'object' || data === null) {
+      alert('导入失败：数据格式无效');
+      importFileInput.value = '';
+      return;
+    }
+
+    // 验证关键字段类型
+    if (data.interval !== undefined && (typeof data.interval !== 'number' || data.interval < 1 || data.interval > 1440)) {
+      alert('导入失败：提醒间隔数据无效');
+      importFileInput.value = '';
+      return;
+    }
+
+    if (data.reps !== undefined && (typeof data.reps !== 'number' || data.reps < 1 || data.reps > 100)) {
+      alert('导入失败：练习次数数据无效');
+      importFileInput.value = '';
+      return;
+    }
 
     if (confirm('导入数据会覆盖当前所有数据，确定继续吗？')) {
       await chrome.storage.sync.clear();
