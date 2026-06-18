@@ -412,3 +412,43 @@ footer {
   background: oklch(75% 0.01 260);
   background-clip: padding-box;
 }
+
+/* Header布局 */
+.header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* 自定义间隔输入 */
+.custom-interval-group {
+  display: none;
+}
+
+.custom-interval-input {
+  padding: 6px 10px;
+  border: 1px solid oklch(88% 0.005 260);
+  border-radius: 4px;
+  font-size: 14px;
+  width: 120px;
+}
+
+.custom-interval-input:focus {
+  outline: none;
+  border-color: oklch(45% 0.15 260);
+}
+
+/* 通用隐藏类 */
+.hidden {
+  display: none !important;
+}
+
+/* 完成按钮间距 */
+.done-btn {
+  margin-left: 10px;
+}

@@ -1,6 +1,8 @@
 // DOM元素
 const enableToggle = document.getElementById('enableToggle');
 const intervalSelect = document.getElementById('intervalSelect');
+const customIntervalGroup = document.getElementById('customIntervalGroup');
+const customIntervalInput = document.getElementById('customInterval');
 const repsSelect = document.getElementById('repsSelect');
 const contractSelect = document.getElementById('contractSelect');
 const relaxSelect = document.getElementById('relaxSelect');
@@ -23,8 +25,25 @@ async function loadSettings() {
     'startTime', 'endTime', 'soundEnabled', 'dailyGoal', 'breakReminderEnabled', 'privacyMode'
   ]);
 
+  // 如果enabled未设置，保存默认值true
+  if (settings.enabled === undefined) {
+    await saveSettings('enabled', true);
+    settings.enabled = true;
+  }
+
   enableToggle.checked = settings.enabled ?? true;
-  intervalSelect.value = settings.interval || 45;
+
+  const interval = settings.interval || 45;
+  const presetValues = ['30', '45', '60', '90', '120'];
+
+  if (presetValues.includes(String(interval))) {
+    intervalSelect.value = interval;
+  } else {
+    intervalSelect.value = 'custom';
+    customIntervalInput.value = interval;
+    customIntervalGroup.style.display = 'flex';
+  }
+
   repsSelect.value = settings.reps || 15;
   contractSelect.value = settings.contractDuration || 5;
   relaxSelect.value = settings.relaxDuration || 10;
@@ -109,7 +128,36 @@ enableToggle.addEventListener('change', async (e) => {
 
 // 修改提醒间隔
 intervalSelect.addEventListener('change', async (e) => {
+  const value = e.target.value;
+
+  if (value === 'custom') {
+    customIntervalGroup.style.display = 'flex';
+    customIntervalInput.focus();
+  } else {
+    customIntervalGroup.style.display = 'none';
+    const interval = parseInt(value);
+    await saveSettings('interval', interval);
+
+    if (enableToggle.checked) {
+      chrome.runtime.sendMessage({
+        action: 'updateInterval',
+        interval: interval
+      });
+    }
+
+    showFeedback(`提醒间隔已设置为${interval}分钟 ✓`);
+  }
+});
+
+// 自定义间隔输入
+customIntervalInput.addEventListener('change', async (e) => {
   const interval = parseInt(e.target.value);
+
+  if (interval < 1 || interval > 1440) {
+    showFeedback('间隔范围：1-1440分钟');
+    return;
+  }
+
   await saveSettings('interval', interval);
 
   if (enableToggle.checked) {
