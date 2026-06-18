@@ -14,8 +14,6 @@ chrome.runtime.onInstalled.addListener(async () => {
   if (breakReminderEnabled) {
     createBreakAlarm();
   }
-
-  console.log('刚刚好插件已安装');
 });
 
 // 创建定时器
@@ -25,19 +23,14 @@ function createAlarm(intervalMinutes) {
     delayInMinutes: intervalMinutes,
     periodInMinutes: intervalMinutes
   });
-  console.log(`定时器已设置：每${intervalMinutes}分钟提醒一次`);
 }
 
 // 监听定时器触发
 chrome.alarms.onAlarm.addListener(async (alarm) => {
-  console.log('Alarm触发:', alarm.name, new Date().toLocaleTimeString());
-
   if (alarm.name === 'healthReminder') {
     const settings = await chrome.storage.sync.get(['enabled', 'startTime', 'endTime']);
-    console.log('当前设置:', settings);
 
     if (!settings.enabled) {
-      console.log('提醒已禁用，跳过');
       return;
     }
 
@@ -47,17 +40,13 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     const startTime = settings.startTime || 0;
     const endTime = settings.endTime || 24;
 
-    console.log(`当前时间: ${currentHour}点, 工作时段: ${startTime}-${endTime}点`);
-
     // 如果设置了时段限制且当前不在时段内，则跳过
     if (startTime > 0 || endTime < 24) {
       if (currentHour < startTime || currentHour >= endTime) {
-        console.log('不在工作时段内，跳过提醒');
         return;
       }
     }
 
-    console.log('准备显示通知...');
     showNotification();
   } else if (alarm.name === 'breakReminder') {
     const { breakReminderEnabled } = await chrome.storage.sync.get('breakReminderEnabled');
@@ -81,8 +70,6 @@ function showNotification() {
     }, (notificationId) => {
       if (chrome.runtime.lastError) {
         console.error('通知创建失败:', chrome.runtime.lastError);
-      } else {
-        console.log('通知已显示:', notificationId);
       }
     });
   });
@@ -133,7 +120,6 @@ function createBreakAlarm() {
     delayInMinutes: 120,
     periodInMinutes: 120
   });
-  console.log('休息提醒已设置：每2小时提醒一次');
 }
 
 // 显示休息通知
