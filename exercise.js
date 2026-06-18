@@ -13,7 +13,7 @@ let exerciseState = {
 
 // 阶段配置
 let phases = {
-  contract: { duration: 5, label: '收缩盆底肌' },
+  contract: { duration: 5, label: '保持' },
   relax: { duration: 10, label: '放松休息' },
   rest: { duration: 3, label: '准备下一次' }
 };
@@ -200,16 +200,16 @@ function updateDisplay() {
   // 更新计时器
   timerEl.textContent = timeLeft;
 
-  // 更新阶段文字（隐私模式下使用简化描述）
+  // 更新阶段文字（使用隐私友好的描述）
   if (currentPhase === 'contract') {
-    phaseEl.textContent = exerciseState.privacyMode ? '保持' : '收缩盆底肌';
-    instructionEl.textContent = exerciseState.privacyMode ? '保持当前状态' : '像憋尿、憋便那样收紧肛门和会阴部，保持收缩状态';
+    phaseEl.textContent = exerciseState.privacyMode ? '保持' : '保持';
+    instructionEl.textContent = exerciseState.privacyMode ? '保持当前状态' : '收紧保持，感受肌肉的收缩';
   } else if (currentPhase === 'relax') {
     phaseEl.textContent = '放松休息';
-    instructionEl.textContent = exerciseState.privacyMode ? '放松休息' : '完全放松盆底肌肉，自然呼吸，休息一会';
+    instructionEl.textContent = exerciseState.privacyMode ? '放松休息' : '完全放松，自然呼吸，休息一会';
   } else if (currentPhase === 'rest') {
     phaseEl.textContent = '准备下一次';
-    instructionEl.textContent = exerciseState.privacyMode ? '准备下一次' : '调整呼吸，准备进行下一次收缩';
+    instructionEl.textContent = exerciseState.privacyMode ? '准备下一次' : '调整呼吸，准备进行下一次';
   }
 
   // 更新计数
@@ -233,13 +233,9 @@ async function completeExercise() {
   // 保存统计数据
   await saveExerciseStats();
 
-  // 更新完成页面文字（隐私模式下使用简化描述）
+  // 更新完成页面文字（隐私友好）
   const completionText = document.getElementById('completionText');
-  if (exerciseState.privacyMode) {
-    completionText.innerHTML = '已完成一组锻炼<br>坚持练习，保持健康';
-  } else {
-    completionText.innerHTML = '已完成一组盆底肌锻炼<br>坚持练习，保持健康';
-  }
+  completionText.innerHTML = '已完成一组锻炼<br>坚持练习，保持健康';
 
   // 显示完成界面
   exerciseView.style.display = 'none';
