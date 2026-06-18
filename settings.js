@@ -63,55 +63,16 @@ async function saveSettings(key, value) {
 // 显示反馈信息
 function showFeedback(message) {
   const feedback = document.createElement('div');
+  feedback.className = 'feedback-toast';
   feedback.textContent = message;
-  feedback.style.cssText = `
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: oklch(45% 0.15 260);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-size: 14px;
-    z-index: 1000;
-    animation: slideDown 0.3s ease-out;
-  `;
 
   document.body.appendChild(feedback);
 
   setTimeout(() => {
-    feedback.style.animation = 'slideUp 0.3s ease-out';
+    feedback.classList.add('hiding');
     setTimeout(() => feedback.remove(), 300);
   }, 2000);
 }
-
-// 添加动画样式
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-20px);
-    }
-  }
-`;
-document.head.appendChild(style);
 
 // 启用/禁用提醒
 enableToggle.addEventListener('change', async (e) => {
